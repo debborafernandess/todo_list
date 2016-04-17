@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-  	@lists = List.order(created_at: :desc)
+    @lists = List.public_view.order(created_at: :desc)
   end
 end

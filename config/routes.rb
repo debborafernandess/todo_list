@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-
+  resources :list, only: [:new, :create, :show]
   root 'home#index'
 
   # Example of regular route:
