@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :list do
     association         :user
-    name                Faker::Name.name
+    name                Faker::Name.title
     private_visibility  false
 end
 

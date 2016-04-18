@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :list, only: [:new, :create, :show]
   root 'home#index'
+
+  resources :lists, only: [:new, :create, :index]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
