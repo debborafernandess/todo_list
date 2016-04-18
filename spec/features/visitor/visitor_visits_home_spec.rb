@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-feature 'visitor_visits_aplication_home_spec' do
+feature 'Visitor visits Home' do
   before(:each) do
   @user         = create(:user)
   @public_list  = create(:list, user: @user);
   @private_list = create(:list, user: @user, name: Faker::Name.name, private_visibility: true)
   end
 
-scenario 'success' do
+scenario 'successfully' do
   visit root_path
 
   expect(page).to     have_content('Star Tasks')
