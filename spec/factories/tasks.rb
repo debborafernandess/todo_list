@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :task do
-    title "MyString"
-    list nil
+    association :list
+    title Faker::Name.name
   end
 end

@@ -3,11 +3,11 @@ FactoryGirl.define do
     association         :user
     name                Faker::Name.title
     private_visibility  false
-end
+  end
 
-factory :user do
-  email     Faker::Internet.email
-  name      Faker::Name.name
-  password  Faker::Internet.password
+  factory :user do
+    email     Faker::Internet.email
+    name      Faker::Name.name
+    password  Faker::Internet.password
   end
 end
