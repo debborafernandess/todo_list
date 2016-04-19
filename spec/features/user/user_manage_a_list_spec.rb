@@ -1,5 +1,5 @@
 feature 'User manage a List' do
-  before(:each) do
+  before(:example) do
     @user = create(:user, email: Faker::Internet.email, password: Faker::Internet.password)
 
     visit root_path

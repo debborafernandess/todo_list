@@ -1,5 +1,5 @@
 feature 'User' do
-  before(:each) do
+  before(:example) do
     @user        = create(:user, email: Faker::Internet.email, password: Faker::Internet.password)
     @second_user = create(:user, email: Faker::Internet.email, password: Faker::Internet.password)
 

@@ -6,12 +6,7 @@
       <%= link_to 'delete', list, method: :delete, data: {confirm: "Delete #{list.name}?"} %>
     <% end %>
   </header>
-    <p class="task">to do...</p>
-    <p class="task">to do...</p>
-    <p class="task">to do..sssssssssssssssssssssssssssssssssss.</p>
-    <p class="task">to do...</p>
-    <p class="task">to do...</p>
-    <br /><%= list.private_visibility? ? 'Private' : 'Public' %>
-    <br /><%= link_to 'Add task', new_list_task_path(list) %>
-
+  <%= render list.tasks if list.tasks %>
+  <br /><%= list.private_visibility? ? 'Private' : 'Public' %>
+  <br /><%= link_to 'Add task', new_list_task_path(list) if user_signed_in? && list.owner?(current_user) %>
 </div>
