@@ -9,4 +9,5 @@
   <%= render list.tasks if list.tasks %>
   <br /><%= list.private_visibility? ? 'Private' : 'Public' %>
   <br /><%= link_to 'Add task', new_list_task_path(list) if user_signed_in? && list.owner?(current_user) %>
+  <br /><%= link_to 'Favorite', favorite_list_path(list) if user_signed_in? && !list.owner?(current_user) %>
 </div>

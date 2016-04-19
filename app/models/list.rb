@@ -2,6 +2,10 @@ class List < ActiveRecord::Base
   belongs_to  :user
 
   has_many    :tasks
+
+  has_many :favorites
+  has_many :favorite_users, through: :favorites
+
   accepts_nested_attributes_for :tasks
 
   validates :user, presence: true
