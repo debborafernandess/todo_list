@@ -7,8 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <h1>Star Tasks</h1>
+  <% if user_signed_in?  %>
+    <%= link_to 'New List', new_list_path   %>
+    <p><%= current_user.name || current_user.login || current_user.email  %></p>
+    <%= link_to 'Sign out', destroy_user_session_path, method: :delete   %>
+  <% end %>
 
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

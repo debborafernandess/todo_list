@@ -1,6 +1,3 @@
-<h1>Star Tasks</h1>
-<%= link_to 'New List', new_list_path  if user_signed_in? %>
-<%= link_to 'Sign Up', new_user_registration_path %>
-<%= link_to 'Login',   new_user_session_path %>
+<%= link_to 'Login',   new_user_session_path unless user_signed_in? %>
 
 <%= render @lists %>

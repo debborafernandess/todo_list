@@ -19,7 +19,7 @@ feature 'User manage a List' do
     fill_in 'Name', with: 'My list'
     click_button 'Create List'
 
-    within('.list:first-child') { expect(page).to have_content('My list') }
+    within("div#list_#{List.last.id}") { expect(page).to have_content('My list') }
   end
 
   scenario 'and edit with success' do
@@ -28,9 +28,11 @@ feature 'User manage a List' do
     visit edit_list_path(list)
 
     fill_in 'Name', with: 'My list updated'
+    check   'Private?'
+
     click_button 'Update List'
 
-    within('.list:first-child') { expect(page).to have_content('My list updated') }
+    expect(page).to have_content('My list updated')
   end
 
   scenario 'and destroy with success' do
@@ -38,8 +40,6 @@ feature 'User manage a List' do
 
     visit lists_path
 
-    within('.list:first-child') do
-      expect{click_link 'delete'}.to change(List, :count).by(-1)
-    end
+    within("div#list_#{List.last.id}") { expect{click_link 'delete'}.to change(List, :count).by(-1) }
   end
 end

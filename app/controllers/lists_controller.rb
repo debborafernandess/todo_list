@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   before_action :get_list, only: [:edit, :update, :destroy]
 
   def index
-    @lists = List.order(created_at: :desc)
+    @lists = List.public_or_own(current_user.id).order(created_at: :desc, updated_at: :desc)
   end
 
   def new
@@ -41,6 +41,6 @@ class ListsController < ApplicationController
   end
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, :private_visibility)
   end
 end
