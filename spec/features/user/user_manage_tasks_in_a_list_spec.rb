@@ -26,6 +26,8 @@ feature 'User manage tasks in a List', js: true do
   end
 
   scenario 'update task', js: true do
+    task = create(:task, list: @list)
+
     within("#list_#{@list.id}") do
       within("#task_#{@task.id}") { click_link 'edit' }
     end
