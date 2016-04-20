@@ -52,4 +52,5 @@ group :test do
   gem 'database_cleaner'
   gem 'poltergeist', '~> 1.9.0'
   gem 'capybara-webkit'
+  gem 'shoulda-matchers'
 end

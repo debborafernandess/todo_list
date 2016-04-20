@@ -8,7 +8,7 @@ class List < ActiveRecord::Base
 
   accepts_nested_attributes_for :tasks
 
-  validates :user, presence: true
+  validates :user, :name, presence: true
 
   scope :public_view,	  -> { where(private_visibility: false) }
   scope :public_or_own, -> (user_id) { where('user_id = ? or private_visibility = false', user_id) }
