@@ -1,14 +1,12 @@
 <nav>
-  <div class="brand">
-    <h1>Star Tasks</h1>
+  <h1 class="brand">ACME TASKLIST</h1>
+  <h2><%= link_to '+ List', new_list_path, remote: true if user_signed_in? %></h2>
+  <div class="account">
+    <% if user_signed_in? %>
+      <h3><%= greeting %></h3>
+      <h3><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></h3>
+    <% else %>
+      <h3><%= link_to 'Login', new_user_session_path %></h3>
+    <% end %>
   </div>
-  <% if user_signed_in?  %>
-    <div class="navbar">
-      <%= link_to 'New List', new_list_path   %>
-    </div>
-    <div class="account">
-      <p><%= current_user.name || current_user.login || current_user.email  %></p>
-      <%= link_to 'Sign out', destroy_user_session_path, method: :delete   %>
-    </div>
-  <% end %>
 </nav>

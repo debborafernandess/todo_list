@@ -11,6 +11,6 @@ feature 'Visitor can Sig up' do
 
     click_button 'Sign up'
 
-    expect(page).to have_content('New List')
+    expect(page).to have_content('+ List')
   end
 end

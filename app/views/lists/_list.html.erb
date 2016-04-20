@@ -1,13 +1,18 @@
-<div class="list" id="list_<%= list.id %>">
-  <header>
-    <%= list.name %>
-    <% if user_signed_in? && list.owner?(current_user) %>
-      <%= link_to 'edit', edit_list_path(list) %>
-      <%= link_to 'delete', list, method: :delete, data: {confirm: "Delete #{list.name}?"} %>
+<%= div_for list do %>
+  <div class="title">
+    <strong><%= list.name %></strong>
+    <span class="right">
+      <%= link_to label_favorite(list), favorite_list_path(list), remote: true if user_signed_in? && !list.owner?(current_user) %>
+      <%= link_to 'Add task', new_list_task_path(list), remote: true if list.owner?(current_user) %>
+    </span>
+  </div>
+  <div class='actions'>
+    <% if list.owner?(current_user) %>
+      <%= link_to 'edit', edit_list_path(list), remote: true %>
+      <%= link_to 'delete', list, method: :delete, data: {confirm: "Delete #{list.name}?"}, remote: true %>
     <% end %>
-  </header>
-  <%= render list.tasks if list.tasks %>
-  <br /><%= list.private_visibility? ? 'Private' : 'Public' %>
-  <br /><%= link_to 'Add task', new_list_task_path(list) if user_signed_in? && list.owner?(current_user) %>
-  <br /><%= link_to 'Favorite', favorite_list_path(list) if user_signed_in? && !list.owner?(current_user) %>
-</div>
+  </div>
+  <div id='tasks'>
+    <%= render list.tasks %>
+  </div>
+<% end %>

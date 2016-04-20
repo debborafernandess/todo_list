@@ -1,4 +1,4 @@
-<%= simple_form_for @list do |f| %>
+<%= simple_form_for @list, remote: true do |f| %>
   <%= f.input :name %>
   <%= f.input :private_visibility, as: :boolean, label: 'Private?', inline_label: true  %>
   <%= f.button :submit %>

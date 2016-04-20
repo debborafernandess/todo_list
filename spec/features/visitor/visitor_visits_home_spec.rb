@@ -8,9 +8,9 @@ feature 'Visitor visits Home' do
   scenario 'successfully' do
     visit root_path
 
-    expect(page).to     have_content('Star Tasks')
+    expect(page).to     have_content('ACME TASKLIST')
     expect(page).to     have_content('Login')
-    expect(page).not_to have_content('New List')
+    expect(page).not_to have_content('+ List')
   end
 
   scenario 'and see only public lists' do
@@ -23,7 +23,8 @@ feature 'Visitor visits Home' do
   scenario 'and don\'t actions links' do
     visit root_path
 
-    expect(page).not_to     have_content('edit')
     expect(page).not_to have_content('delete')
+    expect(page).not_to have_content('edit')
+    expect(page).not_to have_content('Favorite')
   end
 end

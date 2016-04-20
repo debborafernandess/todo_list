@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  respond_to :html, :js
+
   before_action :get_list, only: [:new, :create, :edit]
   before_action :get_task, only: [:edit, :update, :destroy]
 
@@ -8,27 +10,17 @@ class TasksController < ApplicationController
 
   def create
     @task = @list.tasks.new(task_params)
-
-    if @task.save
-      redirect_to lists_path
-    else
-      render :new
-    end
+    flash[:notice] = "Task was successfully created." if @task.save
   end
 
   def edit; end
 
   def update
-    if @task.update(task_params)
-      redirect_to lists_path
-    else
-      render :edit
-    end
+    @task.update(task_params)
   end
 
   def destroy
     @task.destroy
-    redirect_to lists_path
   end
 
   private

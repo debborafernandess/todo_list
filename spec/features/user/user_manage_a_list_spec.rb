@@ -1,10 +1,8 @@
-feature 'User manage a List' do
+feature 'User manage a List', js: true do
   before(:example) do
-    @user = create(:user, email: Faker::Internet.email, password: Faker::Internet.password)
+    @user = create(:user)
 
-    visit root_path
-
-    click_link 'Login'
+    visit new_user_session_path
 
     fill_in 'Email',    with: @user.email
     fill_in 'Password', with: @user.password
@@ -13,13 +11,12 @@ feature 'User manage a List' do
   end
 
   scenario 'create with success' do
-    expect(page).to have_content('New List')
-    click_link 'New List'
+    click_link '+ List'
 
     fill_in 'Name', with: 'My list'
     click_button 'Create List'
 
-    within("div#list_#{List.last.id}") { expect(page).to have_content('My list') }
+    within("div#lists") { expect(page).to have_content('My list') }
   end
 
   scenario 'and edit with success' do
@@ -40,6 +37,10 @@ feature 'User manage a List' do
 
     visit lists_path
 
-    within("div#list_#{List.last.id}") { expect{click_link 'delete'}.to change(List, :count).by(-1) }
+    within("div#list_#{list.id} .actions") do
+      click_link 'delete'
+    end
+
+    expect(page).not_to have_content("div#list_#{list.id}")
   end
 end

@@ -13,59 +13,96 @@
  *= require_tree .
  *= require_self
  */
+
+body { margin: auto; }
+
+a:hover, a:visited { text-decoration: none; }
+
+.container {
+  padding-top: 10px;
+  margin: 0 auto;
+  max-width: 90%;
+}
+
 nav {
-  background-color: #16191C;
-  width: auto;
-  height: 66px;
-  margin: 0 0 2px 0;
-  display: inline;
-  text-transform: uppercase;
-}
-
-nav a {
-  text-decoration: none;
+  background-color: #000;
   color: #FFF;
+  width: 100%;
+  height: 60px;
+  display: inline-block;
 }
 
-nav .brand{
-  float: left;
-  padding: 2px 10px;
-  color: #DAED22;
-}
+nav a { color: #FFF; }
 
-nav .navbar{
+nav h1, nav h2, nav h3{
   float: left;
-  margin: 5px 10px;
+  padding: 0 20px;
 }
 
 nav .account{
   float: right;
-  margin: 0 10px;
+  margin: 0 25px;
 }
 
-body{
-  margin: auto;
-  background-color: #DAED22;
+.login{
+  min-width: 20%;
+  max-width: 50%;
+  margin: 0 auto;
+  background-color: #F9F9F9;
+  padding: 20px;
 }
 
-div.container{
-  margin: 5px;
+h1.brand{
+  float: left;
+  text-transform: uppercase;
+  padding: 0 20px;
+}
+
+#lists{
+  min-width: 20%;
+  max-width: 70%;
+  margin: 0 auto;
+  display: inline-block;
 }
 
 div.list{
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  max-width: 250px;
-  display: inline-table;
-  overflow: hidden;
+  float: left;
+  margin: 5px 5px;
+  border: 2px solid #FFFAC6;
 }
 
-div.list header {
-  padding: 7px;
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.5);
-  background-color: rgba(0, 0, 0, 1);
-  color: #DAED22;
+div.list a {
+  text-decoration: none;
+  color: #000;
 }
 
-div.list .task {
-  border-bottom: 1px dashed rgba(0, 0, 0, 0.5);
+.list .title{
+  line-height: 10px;
+  background-color: #FFFAC6;
+  padding: 5px;
+}
+
+.task {
+  background-color: #FFFCDF;
+  border-bottom: 1px solid #DADADA;
+}
+
+.right { text-align: right; }
+
+form {
+  margin : 0 auto;
+  min-width: 50%;
+  max-width: 90%;
+  margin: 0 auto;
+  background-color: #FFFCDF;
+  padding: 20px;
+}
+
+label, input, button { padding: 4px; }
+
+
+input[type=text] {
+  border: 1px solid #999;
+  border-radius: 4px;
+  -webkit-appearance: none;
 }

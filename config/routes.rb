@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :lists, only: [:new, :create, :index, :edit, :update, :destroy] do
     resources :tasks, only: [:new, :create, :edit, :update, :destroy]
+
     member do
       get 'favorite'
     end

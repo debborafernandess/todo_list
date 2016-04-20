@@ -1,8 +1,11 @@
 class ListsController < ApplicationController
+  respond_to :html, :js
+
   before_action :get_list, only: [:edit, :update, :destroy, :favorite]
 
   def index
     @lists = List.public_or_own(current_user.id).order(created_at: :desc, updated_at: :desc)
+    respond_with @lists
   end
 
   def new
@@ -11,27 +14,17 @@ class ListsController < ApplicationController
 
   def create
     @list = current_user.lists.new(list_params)
-
-    if @list.save
-      redirect_to lists_path
-    else
-      render :new
-    end
+    @list.save
   end
 
   def edit; end
 
   def update
-    if @list.update(list_params)
-      redirect_to lists_path
-    else
-      render :edit
-    end
+    @list.update(list_params)
   end
 
   def destroy
     @list.destroy
-    redirect_to lists_path
   end
 
   def favorite

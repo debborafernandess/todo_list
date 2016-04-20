@@ -1,4 +1,4 @@
-feature 'User manage tasks in a List' do
+feature 'User manage tasks in a List', js: true do
   before(:example) do
     @user = create(:user, email: Faker::Internet.email, password: Faker::Internet.password)
     @list = create(:list, user: @user)
@@ -14,7 +14,7 @@ feature 'User manage tasks in a List' do
     click_button 'Log in'
   end
 
-  scenario 'create tasks' do
+  scenario 'create tasks', js: true do
     within("div#list_#{@list.id}") { click_link 'Add task' }
 
     fill_in "Title", with: 'a new task'
@@ -25,7 +25,7 @@ feature 'User manage tasks in a List' do
     end
   end
 
-  scenario 'update task' do
+  scenario 'update task', js: true do
     within("#list_#{@list.id}") do
       within("#task_#{@task.id}") { click_link 'edit' }
     end
@@ -39,10 +39,16 @@ feature 'User manage tasks in a List' do
   end
 
 
-  scenario 'delete task' do
+  scenario 'delete task', js: true do
     within("#list_#{@list.id}") do
-      within("#task_#{@task.id}") do
-        expect{click_link 'x'}.to change(Task, :count).by(-1)
+      within("#task_#{@task.id} .actions") do
+        click_link 'delete'
+      end
+    end
+
+    within("#list_#{@list.id}") do
+      within("#tasks") do
+        expect(page).not_to have_content("div#task_#{@task.id}")
       end
     end
   end
