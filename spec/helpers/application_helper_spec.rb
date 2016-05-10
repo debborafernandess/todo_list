@@ -4,8 +4,7 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe "#greeting" do
     it "returns the user name" do
       user = create(:user)
-byebug
-      # allow(user).to receive(:authenticate_user!).and_return(true)
+      sign_in user
       expect(helper.greeting).to eq(user.name)
     end
   end
@@ -14,8 +13,7 @@ byebug
     it "unfavorited yet" do
       user = create(:user)
       list = create(:list)
-
-      # allow(user).to receive(:authenticate_user!).and_return(true)
+      sign_in user
 
       expect(helper.label_favorite(list)).to eq('Favorite')
     end
@@ -23,9 +21,8 @@ byebug
     it "favorited" do
       user = create(:user)
       list = create(:list)
-      favorite = create(:favorite, user: user, list: list)
-
-      # allow(user).to receive(:authenticate_user!).and_return(true)
+      create(:favorite, user: user, list: list)
+      sign_in user
 
       expect(helper.label_favorite(list)).to eq('Favorited')
     end

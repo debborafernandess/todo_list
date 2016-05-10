@@ -1,6 +1,6 @@
 feature 'User manage a List', js: true do
-  before(:example) do
-    @user = create(:user)
+  def login(user=nil)
+    @user = user || create(:user)
 
     visit new_user_session_path
 
@@ -10,8 +10,9 @@ feature 'User manage a List', js: true do
     click_button 'Log in'
   end
 
-  scenario 'create with success' do
-    click_link '+ List'
+  scenario 'create with success', js: true do
+    login
+    click_on '+ List'
 
     fill_in 'Name', with: 'My list'
     click_button 'Create List'
@@ -20,10 +21,11 @@ feature 'User manage a List', js: true do
   end
 
   scenario 'and edit with success' do
-    list = create(:list, user: @user)
+    user = create(:user)
+    create(:list, user: user)
+    login user
 
-    visit edit_list_path(list)
-
+    click_on 'edit'
     fill_in 'Name', with: 'My list updated'
     check   'Private?'
 
@@ -33,6 +35,7 @@ feature 'User manage a List', js: true do
   end
 
   scenario 'and destroy with success' do
+    login
     list = create(:list, user: @user)
 
     visit lists_path
