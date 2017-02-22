@@ -16,16 +16,6 @@ ActiveRecord::Schema.define(version: 20160419175349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "favorite_user_lists", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "list_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "favorite_user_lists", ["list_id"], name: "index_favorite_user_lists_on_list_id", using: :btree
-  add_index "favorite_user_lists", ["user_id"], name: "index_favorite_user_lists_on_user_id", using: :btree
-
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "list_id"
@@ -75,8 +65,6 @@ ActiveRecord::Schema.define(version: 20160419175349) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "favorite_user_lists", "lists"
-  add_foreign_key "favorite_user_lists", "users"
   add_foreign_key "favorites", "lists"
   add_foreign_key "favorites", "users"
   add_foreign_key "lists", "users"
