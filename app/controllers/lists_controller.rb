@@ -4,7 +4,7 @@ class ListsController < ApplicationController
   before_action :get_list, only: [:edit, :update, :destroy, :favorite]
 
   def index
-    @lists = List.public_or_own(current_user.id).order(created_at: :desc, updated_at: :desc)
+    @lists = List.publics_and_owned(current_user).order(created_at: :desc, updated_at: :desc)
     respond_with @lists
   end
 
